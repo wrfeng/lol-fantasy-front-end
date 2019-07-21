@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import LoginPage from './Components/LoginPage'
+import HomePage from './Components/HomePage'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    page: 'login'
+  }
+
+  redirect = (page) => {
+    this.setState({ page: page })
+  }
+
+  componentDidMount() {
+    if (localStorage.token) {
+      this.redirect('home')
+    }
+  }
+
+  render(){
+    switch(this.state.page) {
+      case 'login':
+        return < LoginPage redirect={this.redirect}/>
+      case 'home':
+        return < HomePage />
+    }
+  }
 }
 
 export default App;
