@@ -26,7 +26,7 @@ class LoginPage extends React.Component{
       .then(resp => {
         console.log(resp)
         localStorage.setItem('token', resp.token)
-        this.props.redirect('home')
+        this.props.history.push('/')
       })
   }
   render(){
