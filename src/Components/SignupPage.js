@@ -20,7 +20,7 @@ class SignupPage extends React.Component{
       .then(resp => resp.json())
       .then(resp => {
         localStorage.setItem('token', resp.token)
-        this.props.redirect('home')
+        this.props.history.push('/home')
       })
   }
   handleChange = (event) => {
