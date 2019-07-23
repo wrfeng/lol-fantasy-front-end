@@ -20,7 +20,7 @@ class SignupPage extends React.Component{
       .then(resp => resp.json())
       .then(resp => {
         localStorage.setItem('token', resp.token)
-        this.props.history.push('/home')
+        this.props.routerProps.history.push('/leagues')
       })
   }
   handleChange = (event) => {
@@ -29,9 +29,9 @@ class SignupPage extends React.Component{
   render(){
     return(
       <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleChange} name="username" value={this.state.username}/>
-        <input onChange={this.handleChange} name="password" value={this.state.password}/>
-        <input type="submit" value="signup"/>
+        <input onChange={this.handleChange} placeholder="username..." name="username" value={this.state.username}/>
+        <input onChange={this.handleChange} placeholder="password..." name="password" value={this.state.password}/>
+        <input type="submit" value="Signup"/>
       </form>
     )
   }

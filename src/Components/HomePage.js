@@ -1,11 +1,17 @@
 import React from 'react'
+import LoginPage from './LoginPage'
+import SignupPage from './SignupPage'
 
 class HomePage extends React.Component{
-
+  state = {
+    loggedIn: false
+  }
   render(){
     return(
       <div>
-        hi {this.props.username}
+        <LoginPage routerProps={this.props}/>
+        or
+        <SignupPage routerProps={this.props}/>
       </div>
     )
   }

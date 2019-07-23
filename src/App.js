@@ -1,49 +1,51 @@
 import React from 'react';
-import LoginPage from './Components/LoginPage'
 import HomePage from './Components/HomePage'
-import SignupPage from './Components/SignupPage'
-import { Switch, Route } from 'react-router-dom'
+import LeaguesPage from './Containers/LeaguesPage'
+import { BrowserRouter as Router , Route } from 'react-router-dom'
+import LeagueShow from './Components/LeagueShow'
 
 class App extends React.Component {
   state = {
-    username: ''
+    players: [],
+    drafted_teams: [],
+    currentUser: null
   }
 
-  redirect = (page) => {
-    this.setState({ page: page })
-  }
-
-  componentDidMount() {
+  getCurrentUser = () => {
     if (localStorage.token) {
       fetch('http://localhost:3001/profile', {
         headers: {
           Authorization: localStorage.token
         }
       })
-      .then(resp => resp.json())
-      .then(profileInfo => this.setState({ username: profileInfo.username }))
-    } 
+        .then(resp => resp.json())
+        .then(profileInfo => this.setState({ currentUser: profileInfo }))
+    }
   }
+  componentDidMount() {
 
+    this.getCurrentUser()
+
+    fetch('http://localhost:3001/drafted_teams')
+    .then(resp => resp.json())
+    .then(resp => this.setState({drafted_teams: resp.drafted_teams}))
+
+    fetch('http://localhost:3001/players')
+      .then(resp => resp.json())
+      .then(resp => this.setState({players: resp.data}))
+  }
 
   render(){
     return(
-      <Switch>
-        <Route exact path='/' render={() => <HomePage username={this.state.username} />}/>
-        <Route path='/login' component={LoginPage}/>
-        <Route path='/signup' component={SignupPage}/>
-      </Switch>
+      <div>
+        <Router>
+          <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} {...routerProps} />} />
+          <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} getCurrentUser={this.getCurrentUser} currentUser={this.state.currentUser}/>}/>
+          <Route exact path='/' render={routerProps => <HomePage {...routerProps} />}/>
+        </Router>
+      </div>
     )
   }
 }
 
 export default App;
-
-// switch (this.state.page) {
-//   case 'login':
-//     return < LoginPage redirect={this.redirect} />
-//   case 'home':
-//     return < HomePage />
-//   case 'signup':
-//     return <SignupPage redirect={this.redirect} />
-// }
