@@ -1,6 +1,6 @@
 import React from 'react'
-import LeagueForm from '../Components/LeagueForm'
-import LeaguesList from '../Components/LeaguesList';
+import LeagueForm from './LeagueForm'
+import LeaguesList from '../Containers/LeaguesList';
 
 
 class LeaguesPage extends React.Component{
@@ -38,6 +38,16 @@ class LeaguesPage extends React.Component{
         },
         body: JSON.stringify({ user_id: this.props.currentUser.id, league_id: resp.id })
       })
+      fetch('http://localhost:3001/drafted_teams', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({ user_id: 2, league_id: resp.id })
+      })
+
+
     })
   }
 

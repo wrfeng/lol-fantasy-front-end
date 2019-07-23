@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 class LeaguesList extends React.Component{
   render(){
-    const leagues = Object.keys(this.props.leagues).map(leagueId => <div><Link key={leagueId} to={`/leagues/${leagueId}`}>{this.props.leagues[leagueId].attributes.name}</Link></div>)
+    const leagues = Object.keys(this.props.leagues).map(leagueId => <div key={leagueId}><Link to={`/leagues/${leagueId}`}>{this.props.leagues[leagueId].attributes.name}</Link></div>)
     return(
       <div>
         {leagues}

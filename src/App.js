@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePage from './Components/HomePage'
-import LeaguesPage from './Containers/LeaguesPage'
+import LeaguesPage from './Components/LeaguesPage'
 import { BrowserRouter as Router , Route } from 'react-router-dom'
 import LeagueShow from './Components/LeagueShow'
 
@@ -39,7 +39,7 @@ class App extends React.Component {
     return(
       <div>
         <Router>
-          <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} {...routerProps} />} />
+          <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow currentUser={this.state.currentUser} leagues={this.state.leagues} {...routerProps} />} />
           <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} getCurrentUser={this.getCurrentUser} currentUser={this.state.currentUser}/>}/>
           <Route exact path='/' render={routerProps => <HomePage {...routerProps} />}/>
         </Router>
