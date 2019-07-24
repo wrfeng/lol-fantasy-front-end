@@ -22,17 +22,13 @@ class App extends React.Component {
         .then(profileInfo => this.setState({ currentUser: profileInfo }))
     }
   }
-  componentDidMount() {
+  componentDidMount(){
 
     this.getCurrentUser()
 
     fetch('http://localhost:3001/drafted_teams')
     .then(resp => resp.json())
     .then(resp => this.setState({drafted_teams: resp.drafted_teams}))
-
-    fetch('http://localhost:3001/players')
-      .then(resp => resp.json())
-      .then(resp => this.setState({players: resp.data}))
   }
 
   render(){

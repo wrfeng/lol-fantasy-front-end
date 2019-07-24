@@ -4,7 +4,8 @@ import PlayersContainer from '../Containers/PlayersContainer'
 class Draft extends React.Component{
   state = {
     myTeam: [],
-    theirTeam: []  
+    theirTeam: [],
+    players: []
   }
 
   componentDidMount(){
@@ -13,13 +14,25 @@ class Draft extends React.Component{
       .then(resp => {
         let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
         let otherTarget = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
-        console.log(target)
-        console.log(otherTarget)
         this.setState({
-          myTeam: target.attributes.players
+          myTeam: target.attributes.players,
+          theirTeam: otherTarget.attributes.players
         })
       })
+
+    fetch('http://localhost:3001/players')
+      .then(resp => resp.json())
+      .then(players => this.setState({ players: players.data }))
+
+
   }
+
+  draft = (target) => {
+    this.setState({
+      players: this.state.players.filter(player => player.id !== target.id)
+    })
+  }
+
   render(){
     return(
       <div>
@@ -27,7 +40,7 @@ class Draft extends React.Component{
   
         <h1>Opponents Team</h1>
 
-        <PlayersContainer />
+        <PlayersContainer players={this.state.players} draft={this.draft}/>
       </div>
     )
   }
