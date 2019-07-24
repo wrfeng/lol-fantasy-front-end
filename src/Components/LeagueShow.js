@@ -6,10 +6,16 @@ class LeagueShow extends React.Component{
     drafted: false
   }
 
+  finishDraft = (num) => {
+    if (num >= 20) {
+      this.setState({drafted: true})
+    }
+  }
   render(){
     return(
       <div>
-        {this.state.drafted && !this.props.currentUser ? null : <Draft currentUser={this.props.currentUser} leagueId={this.props.match.params.leagueId}/>}
+        {this.state.drafted ? null : <Draft finishDraft={this.finishDraft}currentUser={this.props.currentUser} leagueId={this.props.match.params.leagueId}/>}
+        {this.state.drafted ? <div>hi</div> : null}
       </div>
     )
   }
