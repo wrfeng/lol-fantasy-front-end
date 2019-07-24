@@ -12,11 +12,10 @@ class Draft extends React.Component{
 
   componentDidMount(){
 
-
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
-        let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+        let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === 1 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
         let otherTarget = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
         this.setState({
           myTeam: target.attributes.players,

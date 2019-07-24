@@ -1,5 +1,6 @@
 import React from 'react'
 import Draft from './Draft'
+import Matchup from './Matchup'
 class LeagueShow extends React.Component{
   
   state = {
@@ -14,11 +15,12 @@ class LeagueShow extends React.Component{
   render(){
     return(
       <div>
-        {this.state.drafted ? null : <Draft finishDraft={this.finishDraft}currentUser={this.props.currentUser} leagueId={this.props.match.params.leagueId}/>}
-        {this.state.drafted ? <div>hi</div> : null}
+        {this.state.drafted && this.props.currentUser ? null : <Draft finishDraft={this.finishDraft}currentUser={this.props.currentUser} getCurrentUser={this.props.getCurrentUser} leagueId={this.props.match.params.leagueId}/>}
+        {this.state.drafted ? <Matchup leagueId={this.props.match.params.leagueId}/> : null}
       </div>
     )
   }
 }
 
 export default LeagueShow
+

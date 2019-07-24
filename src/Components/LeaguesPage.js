@@ -46,8 +46,15 @@ class LeaguesPage extends React.Component{
         },
         body: JSON.stringify({ user_id: 2, league_id: resp.id })
       })
+    })
 
-
+    fetch(`http://localhost:3001/matchups`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({user_id: this.props.currentUser.id, opponent_id: 2})
     })
   }
 

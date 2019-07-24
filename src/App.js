@@ -35,7 +35,7 @@ class App extends React.Component {
     return(
       <div>
         <Router>
-          <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow currentUser={this.state.currentUser} leagues={this.state.leagues} {...routerProps} />} />
+          <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow getCurrentUser={this.getCurrentUser} currentUser={this.state.currentUser} leagues={this.state.leagues} {...routerProps} />} />
           <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} getCurrentUser={this.getCurrentUser} currentUser={this.state.currentUser}/>}/>
           <Route exact path='/' render={routerProps => <HomePage {...routerProps} />}/>
         </Router>
