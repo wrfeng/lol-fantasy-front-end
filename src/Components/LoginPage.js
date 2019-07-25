@@ -24,8 +24,9 @@ class LoginPage extends React.Component{
     })
       .then(resp => resp.json())
       .then(resp => {
+        console.log(resp)
         localStorage.setItem('token', resp.token)
-        this.props.routerProps.history.push('/leagues')
+        resp.token && this.props.routerProps.history.push('/leagues')
       })
   }
   render(){

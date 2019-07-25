@@ -47,7 +47,6 @@ class Draft extends React.Component{
         })
       })
       this.computer_draft(selected)
-      console.log(this.state.players.length)
   }
 
   computer_draft = (selected) => {
@@ -80,7 +79,7 @@ class Draft extends React.Component{
         <h1>Opponents Team</h1>
           {theirPlayers}
         <PlayersContainer players={this.state.players} draft={this.draft}/>
-        {this.props.finishDraft(this.state.myTeam.length + this.state.theirTeam.length)}
+        {this.state.myTeam.length + this.state.theirTeam.length === 20 ? this.props.finishDraft() : null}
       </div>
     )
   }

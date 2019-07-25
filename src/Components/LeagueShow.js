@@ -7,10 +7,8 @@ class LeagueShow extends React.Component{
     drafted: false
   }
 
-  finishDraft = (num) => {
-    if (num >= 20) {
-      this.setState({drafted: true})
-    }
+  finishDraft = () => {
+    this.setState({drafted: true})  
   }
   render(){
     return(
