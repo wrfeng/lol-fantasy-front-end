@@ -3,12 +3,13 @@ import HomePage from './Components/HomePage'
 import LeaguesPage from './Components/LeaguesPage'
 import { BrowserRouter as Router , Route } from 'react-router-dom'
 import LeagueShow from './Components/LeagueShow'
-
+import Draft from './Components/Draft'
 class App extends React.Component {
   state = {
     players: [],
     drafted_teams: [],
-    currentUser: null
+    currentUser: null,
+    leagueId: ''
   }
 
   getCurrentUser = () => {
@@ -31,17 +32,21 @@ class App extends React.Component {
     .then(resp => this.setState({drafted_teams: resp.drafted_teams}))
   }
 
+  selectLeague = (leagueId) => {
+    this.setState({leagueId: leagueId})
+  }
+
   render(){
     return(
       <div>
         <Router>
-          <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow getCurrentUser={this.getCurrentUser} currentUser={this.state.currentUser} leagues={this.state.leagues} {...routerProps} />} />
-          <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} getCurrentUser={this.getCurrentUser} currentUser={this.state.currentUser}/>}/>
+          {this.state.currentUser && <Route path={`/draft`} render={routerProps => <Draft {...routerProps} currentUser={this.state.currentUser} leagueId={this.state.leagueId}/>}/>}
+          {this.state.currentUser && <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow currentUser={this.state.currentUser} leagues={this.state.leagues} {...routerProps} />}/>}
+          {this.state.currentUser && <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} currentUser={this.state.currentUser} selectLeague={this.selectLeague}/>}/>}
           <Route exact path='/' render={routerProps => <HomePage {...routerProps} />}/>
         </Router>
       </div>
-    )
-  }
+    )}
 }
 
 export default App;

@@ -12,17 +12,22 @@ class Draft extends React.Component{
 
   componentDidMount(){
 
+    if (!this.props.leagueId){
+      this.props.history.push('/leagues')
+    }
+
+    if (this.props.leagueId){
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
-        let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === 1 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+        let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
         let otherTarget = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
         this.setState({
           myTeam: target.attributes.players,
           theirTeam: otherTarget.attributes.players
         })
       })
-
+    }
     fetch('http://localhost:3001/players')
       .then(resp => resp.json())
       .then(players => this.setState({ players: players.data }))
@@ -67,11 +72,22 @@ class Draft extends React.Component{
           body: JSON.stringify({ drafted_team_id: target.id, player_id: random_player.id })
         })
       })
+
+    if (this.state.theirTeam.length >= 10) {
+      fetch(`http://localhost:3001/leagues/${this.props.leagueId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({drafted: true})
+      })
+    }
   }
 
   render(){
-    const myPlayers = this.state.myTeam.map(player => <div><Player playerData={player} /></div>)
-    const theirPlayers = this.state.theirTeam.map(player => <div><Player playerData={player} /></div>)
+    const myPlayers = this.state.myTeam.map(player => <div key={player.id}><Player playerData={player} /></div>)
+    const theirPlayers = this.state.theirTeam.map(player => <div key={player.id}><Player playerData={player} /></div>)
     return(
       <div>
         <h1>My Team</h1>
@@ -79,7 +95,6 @@ class Draft extends React.Component{
         <h1>Opponents Team</h1>
           {theirPlayers}
         <PlayersContainer players={this.state.players} draft={this.draft}/>
-        {this.state.myTeam.length + this.state.theirTeam.length === 20 ? this.props.finishDraft() : null}
       </div>
     )
   }

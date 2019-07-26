@@ -3,9 +3,7 @@ import LoginPage from './LoginPage'
 import SignupPage from './SignupPage'
 
 class HomePage extends React.Component{
-  state = {
-    loggedIn: false
-  }
+
   render(){
     return(
       <div>

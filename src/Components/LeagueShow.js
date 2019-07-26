@@ -2,19 +2,17 @@ import React from 'react'
 import Draft from './Draft'
 import Matchup from './Matchup'
 class LeagueShow extends React.Component{
-  
+  leagueId = this.props.match.params.leagueId
+  currentUser = this.props.currentUser
   state = {
     drafted: false
   }
 
-  finishDraft = () => {
-    this.setState({drafted: true})  
-  }
+
   render(){
     return(
       <div>
-        {this.state.drafted && this.props.currentUser ? null : <Draft finishDraft={this.finishDraft}currentUser={this.props.currentUser} getCurrentUser={this.props.getCurrentUser} leagueId={this.props.match.params.leagueId}/>}
-        {this.state.drafted ? <Matchup leagueId={this.props.match.params.leagueId}/> : null}
+        <Matchup leagueId={this.props.match.params.leagueId} /> 
       </div>
     )
   }
