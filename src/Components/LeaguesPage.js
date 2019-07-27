@@ -10,17 +10,15 @@ class LeaguesPage extends React.Component{
     leagues: []
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:3001/leagues`)
-      .then(resp => resp.json())
-      .then(resp => {
-        console.log(resp.data)
-        this.setState({ 
-          leagues: resp.data.filter(league => league.attributes.users.find(user => user.id === this.props.currentUser.id))  
+    componentDidMount(){
+      fetch(`http://localhost:3001/leagues`)
+        .then(resp => resp.json())
+        .then(resp => {
+          this.setState({
+            leagues: resp.data
+          })
         })
-      })
-  }
-    
+    }
   createLeague = (league) => {
     fetch('http://localhost:3001/leagues', {
       method: 'POST',
@@ -62,7 +60,6 @@ class LeaguesPage extends React.Component{
   }
 
   render(){
-    // console.log(this.state.leagues)
     return(
       <div>
         {this.state.leagues.length > 0 ? <LeaguesList currentUser={this.props.currentUser} selectLeague={this.props.selectLeague} leagues={this.state.leagues} /> : null}

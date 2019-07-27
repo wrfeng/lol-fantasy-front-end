@@ -6,7 +6,6 @@ class LeaguesList extends React.Component{
   render(){
     // const myLeagues = this.props.leagues.filter(league => league.attributes.users[0].id === this.props.currentUserId)
     // myLeagues.map(league => )
-    console.log(this.props.currentUser.id)
     
 
     const leagues = this.props.leagues.map((league, idx) => {
