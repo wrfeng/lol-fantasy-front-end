@@ -7,9 +7,10 @@ class HomePage extends React.Component{
   render(){
     return(
       <div>
-        <LoginPage routerProps={this.props}/>
+        
+        <LoginPage setUser={this.props.setUser} routerProps={this.props}/>
         or
-        <SignupPage routerProps={this.props}/>
+        <SignupPage setUser={this.props.setUser} routerProps={this.props}/>
       </div>
     )
   }

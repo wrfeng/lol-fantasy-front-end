@@ -9,14 +9,9 @@ class Draft extends React.Component{
     players: []
   }
 
-
+  
   componentDidMount(){
-
-    if (!this.props.leagueId){
-      this.props.history.push('/leagues')
-    }
-
-    if (this.props.leagueId){
+    
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
@@ -27,7 +22,7 @@ class Draft extends React.Component{
           theirTeam: otherTarget.attributes.players
         })
       })
-    }
+
     fetch('http://localhost:3001/players')
       .then(resp => resp.json())
       .then(players => this.setState({ players: players.data }))
@@ -86,8 +81,8 @@ class Draft extends React.Component{
   }
 
   render(){
-    const myPlayers = this.state.myTeam.map(player => <div key={player.id}><Player playerData={player} /></div>)
-    const theirPlayers = this.state.theirTeam.map(player => <div key={player.id}><Player playerData={player} /></div>)
+    const myPlayers = this.state.myTeam.map(player => <div ><Player playerData={player} /></div>)
+    const theirPlayers = this.state.theirTeam.map(player => <div ><Player playerData={player} /></div>)
     return(
       <div>
         <h1>My Team</h1>

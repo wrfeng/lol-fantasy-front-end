@@ -14,7 +14,10 @@ class LeaguesPage extends React.Component{
     fetch(`http://localhost:3001/leagues`)
       .then(resp => resp.json())
       .then(resp => {
-        this.setState({ leagues: resp.data })
+        console.log(resp.data)
+        this.setState({ 
+          leagues: resp.data.filter(league => league.attributes.users.find(user => user.id === this.props.currentUser.id))  
+        })
       })
   }
     
@@ -29,7 +32,7 @@ class LeaguesPage extends React.Component{
     })
     .then(resp => resp.json())
     .then(resp => {
-      this.setState({leagues: [...this.state.leagues, {attributes:  {name: resp.name} }]})
+      this.setState({leagues: [...this.state.leagues, {id: resp.id, attributes:  {name: resp.name, users: [{id: this.props.currentUser.id}]} }]})
       fetch('http://localhost:3001/drafted_teams', {
         method: 'POST',
         headers: {
@@ -48,17 +51,18 @@ class LeaguesPage extends React.Component{
       })
     })
 
-    fetch(`http://localhost:3001/matchups`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({user_id: this.props.currentUserId, opponent_id: 2})
-    })
+    // fetch(`http://localhost:3001/matchups`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Accept: 'application/json'
+    //   },
+    //   body: JSON.stringify({user_id: this.props.currentUserId, opponent_id: 2})
+    // })
   }
 
   render(){
+    // console.log(this.state.leagues)
     return(
       <div>
         {this.state.leagues.length > 0 ? <LeaguesList currentUser={this.props.currentUser} selectLeague={this.props.selectLeague} leagues={this.state.leagues} /> : null}
