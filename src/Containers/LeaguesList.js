@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 class LeaguesList extends React.Component{
   
+
   render(){
     // const myLeagues = this.props.leagues.filter(league => league.attributes.users[0].id === this.props.currentUserId)
     // myLeagues.map(league => )
@@ -11,8 +12,8 @@ class LeaguesList extends React.Component{
     const leagues = this.props.leagues.map((league, idx) => {
       const leagueId = league.id
       return <div key={league.id} onClick={() => this.props.selectLeague(leagueId)}>
-        {league.drafted && league.attributes.users.find(user => user.id === this.props.currentUser.id) ? <Link to={`/leagues/${league.id}`}>{this.props.leagues[idx].attributes.name}</Link> : null}
-        {!league.drafted && league.attributes.users.find(user => user.id === this.props.currentUser.id) ? <Link to={`/draft`}>{this.props.leagues[idx].attributes.name}</Link>  : null }
+        {league.attributes.drafted && league.attributes.users.find(user => user.id === this.props.currentUser.id) ? <div> <Link to={{ pathname: `/leagues/${leagueId}`, state: { myDraftedId: league.attributes.drafted_teams[0].id, theirDraftedId: 2 } }}>{this.props.leagues[idx].attributes.name}</Link> </div>: null}
+        {!league.attributes.drafted && league.attributes.users.find(user => user.id === this.props.currentUser.id) ? <div><Link to={`/draft`}>{this.props.leagues[idx].attributes.name}</Link> </div> : null }
         
         </div>
     })
@@ -24,4 +25,6 @@ class LeaguesList extends React.Component{
   }
 }
 
+
 export default LeaguesList
+

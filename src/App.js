@@ -29,11 +29,9 @@ class App extends React.Component {
   }
   componentDidMount(){
     this.getCurrentUser()
-
     fetch('http://localhost:3001/drafted_teams')
     .then(resp => resp.json())
     .then(resp => this.setState({drafted_teams: resp.drafted_teams}))
-
 
   }
 

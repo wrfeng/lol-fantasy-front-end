@@ -11,7 +11,7 @@ class LeagueForm extends React.Component{
 
   handleSubmit = (event) => {
     event.preventDefault()
-
+    this.setState({league_name: ''})
     this.props.createLeague(this.state)
   }
 

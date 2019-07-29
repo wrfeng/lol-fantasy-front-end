@@ -6,7 +6,9 @@ class Draft extends React.Component{
   state = {
     myTeam: [],
     theirTeam: [],
-    players: []
+    players: [],
+    myDraftedId: '',
+    theirDraftedId: ''
   }
 
   
@@ -27,7 +29,6 @@ class Draft extends React.Component{
       .then(resp => resp.json())
       .then(players => this.setState({ players: players.data }))
 
-
   }
 
   draft = (selected) => {
@@ -45,6 +46,7 @@ class Draft extends React.Component{
           },
           body: JSON.stringify({drafted_team_id: target.id, player_id: selected.id})
         })
+        this.setState({myDraftedId: target.id})
       })
       this.computer_draft(selected)
   }
@@ -66,18 +68,20 @@ class Draft extends React.Component{
           },
           body: JSON.stringify({ drafted_team_id: target.id, player_id: random_player.id })
         })
+        this.setState({theirDraftedId: target.id})
+        if (this.state.myTeam.length === 10) {
+          fetch(`http://localhost:3001/leagues/${this.props.leagueId}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({ drafted: true })
+          })
+          // console.log(this.props)
+          this.props.history.push(`/leagues/${this.props.leagueId}`)
+        }
       })
-
-    if (this.state.theirTeam.length >= 10) {
-      fetch(`http://localhost:3001/leagues/${this.props.leagueId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify({drafted: true})
-      })
-    }
   }
 
   render(){
