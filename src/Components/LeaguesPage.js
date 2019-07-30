@@ -63,7 +63,7 @@ class LeaguesPage extends React.Component{
     return(
       <div>
         {this.state.leagues.length > 0 ? <LeaguesList currentUser={this.props.currentUser} selectLeague={this.props.selectLeague} leagues={this.state.leagues} /> : null}
-        <Route path={`${this.props.match.url}/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} {...routerProps}/>}/>
+        <Route path={`leagues/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} {...routerProps}/>}/>
         <LeagueForm createLeague={this.createLeague} currentUser={this.props.currentUser}/>
       </div>
     )

@@ -9,7 +9,8 @@ class App extends React.Component {
     players: [],
     drafted_teams: [],
     currentUser: null,
-    leagueId: ''
+    leagueId: '',
+    leagues: []
   }
 
   setUser = (user) => {
@@ -17,6 +18,11 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+
+    fetch('http://localhost:3001/leagues/')
+      .then(resp => resp.json())
+      .then(resp => this.setState({leagues: resp.data}))
+
     if (localStorage.token) {
       fetch('http://localhost:3001/profile', {
         headers: {
@@ -37,7 +43,7 @@ class App extends React.Component {
       <div>
         <Router>
           {this.state.currentUser && this.state.leagueId ? <Route path={`/draft`} render={routerProps => <Draft {...routerProps} currentUser={this.state.currentUser} leagueId={this.state.leagueId} />} /> : <Route exact path='/draft' render={routerProps => <LeaguesPage {...routerProps} currentUser={this.state.currentUser} selectLeague={this.selectLeague} />} />}
-          {this.state.currentUser && <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow currentUser={this.state.currentUser} {...routerProps} />}/>}
+          {this.state.currentUser && this.state.leagues.length > 0 && <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} selectLeague={this.selectLeague} currentUser={this.state.currentUser} {...routerProps} />}/>}
           {this.state.currentUser && <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} currentUser={this.state.currentUser} selectLeague={this.selectLeague}/>}/>}
           <Route exact path='/' render={routerProps => <HomePage setUser={this.setUser} {...routerProps} />}/>
         </Router>

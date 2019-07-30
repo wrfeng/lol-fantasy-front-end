@@ -1,5 +1,7 @@
 import React from 'react'
 import Matchup from './Matchup'
+import MyLeagues from './MyLeagues'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 class LeagueShow extends React.Component{  
   state = {
     myTeam: [],
@@ -8,9 +10,9 @@ class LeagueShow extends React.Component{
   }
 
   componentDidMount(){
+
     let draftedId = this.props.location.state.myDraftedId || this.props.history.state.myDraftedId
     let theirDraftedId = this.props.location.state.theirDraftedId || this.props.history.state.theirDraftedId
-    console.log("hi")
     if (this.props.location.state.myTeam) {
       this.setState({
         myTeam: this.props.location.state.myTeam,
@@ -33,10 +35,15 @@ class LeagueShow extends React.Component{
     }
   }
 
+  showLeagues =() => {
+    this.props.history.push('/leagues')
+  }
+
   render(){
     return(
       <div>
         <Matchup myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} /> 
+        <MyLeagues showLeagues={this.showLeagues}/>
       </div>
     )
   }

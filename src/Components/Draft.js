@@ -18,15 +18,19 @@ class Draft extends React.Component{
       .then(resp => {
         let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
         let otherTarget = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+        let names = target.attributes.players.map(player => player.ign)
+        let otherNames = otherTarget.attributes.players.map(player => player.ign)
+        let test = resp.included.filter(player => names.includes(player.attributes.ign))
+        let otherTest = resp.included.filter(player => otherNames.includes(player.attributes.ign))
         this.setState({
-          myTeam: target.attributes.players,
-          theirTeam: otherTarget.attributes.players
+          myTeam: test,
+          theirTeam: otherTest
         })
 
         let myTeamNames = this.state.myTeam.map(player => player.ign)
         let theirTeamNames = this.state.theirTeam.map(player => player.ign)
-        console.log(myTeamNames)
-        console.log(theirTeamNames)
+        // console.log(myTeamNames)
+        // console.log(theirTeamNames)
         fetch('http://localhost:3001/players')
           .then(resp => resp.json())
           .then(players => this.setState({
@@ -49,7 +53,9 @@ class Draft extends React.Component{
   }
 
   draft = (selected) => {
-    this.setState({ myTeam: [...this.state.myTeam, selected] })
+    if (this.state.myTeam.length >= 10) return
+
+    this.setState({ myTeam: [...this.state.myTeam, selected], players: this.state.players.filter(player => player.attributes.ign !== selected.attributes.ign) })
     let random_number = Math.floor(Math.random() * this.state.players.length)
     let random_player = this.state.players[random_number]
     this.setState({ players: this.state.players.filter(player => player.id !== random_player.id && player.id !== selected.id) })
@@ -71,7 +77,7 @@ class Draft extends React.Component{
   }
 
   computer_draft = (random_player) => {
-    console.log(random_player)
+    // console.log(random_player)
     this.setState({ theirTeam: [...this.state.theirTeam, random_player] })
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
@@ -102,8 +108,8 @@ class Draft extends React.Component{
   }
 
   render(){
-    const myPlayers = this.state.myTeam.map(player => <div key={player.ign}><Player playerData={player.attributes} /></div>)
-    const theirPlayers = this.state.theirTeam.map(player => <div key={player.ign}><Player playerData={player.attributes} /></div>)
+    const myPlayers = this.state.myTeam.map(player => <div key={player.id}><Player playerData={player.attributes} /></div>)
+    const theirPlayers = this.state.theirTeam.map(player => <div key={player.id}><Player playerData={player.attributes} /></div>)
     return(
       <div>
         <h1>My Team</h1>
