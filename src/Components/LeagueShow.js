@@ -6,29 +6,41 @@ class LeagueShow extends React.Component{
   
   state = {
     myTeam: [],
-    theirTeam: []
+    theirTeam: [],
+    myDrafted: '',
+    theirDrafted: ''
   }
 
   componentDidMount(){
-    fetch(`http://localhost:3001/drafted_teams/${this.props.location.state.myDraftedId}`)
-      .then(resp => resp.json())
-      .then(resp => {
-        this.setState({myTeam: resp.included})
+    let draftedId = this.props.location.state.myDraftedId || this.props.history.state.myDraftedId
+    let theirDraftedId = this.props.location.state.theirDraftedId || this.props.history.state.theirDraftedId
+    console.log("hi")
+    if (this.props.location.state.myTeam) {
+      this.setState({
+        myTeam: this.props.location.state.myTeam,
+        theirTeam: this.props.location.state.theirTeam
       })
-    
-    fetch(`http://localhost:3001/drafted_teams/${this.props.location.state.theirDraftedId}`)
-      .then(resp => resp.json())
-      .then(resp => {
-        this.setState({theirTeam: resp.included})
-      })
-    
+    } else{
+
+      fetch(`http://localhost:3001/drafted_teams/${draftedId}`)
+        .then(resp => resp.json())
+        .then(resp => {
+          this.setState({ myTeam: resp.included, myDrafted: resp.data})
+        })
+      
+      fetch(`http://localhost:3001/drafted_teams/${theirDraftedId}`)
+        .then(resp => resp.json())
+        .then(resp => {
+          this.setState({ theirTeam: resp.included, theirDrafted: resp.data})
+          
+        })
+    }
   }
 
   render(){
     return(
       <div>
-        {console.log(this.state)}
-        <Matchup myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} /> 
+        <Matchup myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} myDrafted={this.state.myDrafted} theirDrafted={this.state.theirDrafted} /> 
       </div>
     )
   }

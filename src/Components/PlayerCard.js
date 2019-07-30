@@ -4,6 +4,7 @@ class Player extends React.Component {
   render() {
     return (
       <div>
+        {/* {console.log(this.props)} */}
         <img src={this.props.playerData.img_url} height="200" width="200"></img>
         <h4>{this.props.playerData.stats[this.props.week].ign}</h4>
         <div>Team: {this.props.playerData.stats[this.props.week].team}</div>
