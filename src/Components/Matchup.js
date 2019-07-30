@@ -21,8 +21,9 @@ class Matchup extends React.Component{
   render(){
     let players = ''
     let players2 = ''
-    if(this.props.myTeam[0]) {players = this.props.myTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player.attributes} /></div>)}
-    if(this.props.theirTeam[0]) {players2 = this.props.theirTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player.attributes} /></div>)}
+    console.log(this.props)
+    if(this.props.myTeam[0]) {players = this.props.myTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player} /></div>)}
+    if(this.props.theirTeam[0]) {players2 = this.props.theirTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player} /></div>)}
     return(
       <div>
         <button onClick={this.previousWeek}>Prev</button>

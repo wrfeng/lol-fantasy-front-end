@@ -1,14 +1,10 @@
 import React from 'react'
 import Matchup from './Matchup'
-class LeagueShow extends React.Component{
-  leagueId = this.props.match.params.leagueId
-  currentUser = this.props.currentUser
-  
+class LeagueShow extends React.Component{  
   state = {
     myTeam: [],
     theirTeam: [],
-    myDrafted: '',
-    theirDrafted: ''
+
   }
 
   componentDidMount(){
@@ -40,7 +36,7 @@ class LeagueShow extends React.Component{
   render(){
     return(
       <div>
-        <Matchup myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} myDrafted={this.state.myDrafted} theirDrafted={this.state.theirDrafted} /> 
+        <Matchup myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} /> 
       </div>
     )
   }

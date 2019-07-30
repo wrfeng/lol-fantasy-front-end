@@ -13,7 +13,6 @@ class Draft extends React.Component{
 
   
   componentDidMount(){
-    
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
@@ -23,11 +22,21 @@ class Draft extends React.Component{
           myTeam: target.attributes.players,
           theirTeam: otherTarget.attributes.players
         })
+
+        let myTeamNames = this.state.myTeam.map(player => player.ign)
+        let theirTeamNames = this.state.theirTeam.map(player => player.ign)
+        console.log(myTeamNames)
+        console.log(theirTeamNames)
+        fetch('http://localhost:3001/players')
+          .then(resp => resp.json())
+          .then(players => this.setState({
+            players: players.data.filter(player => !myTeamNames.includes(player.attributes.ign) && !theirTeamNames.includes(player.attributes.ign))
+          }))
+
+
       })
 
-    fetch('http://localhost:3001/players')
-      .then(resp => resp.json())
-      .then(players => this.setState({ players: players.data }))
+
 
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
@@ -93,8 +102,8 @@ class Draft extends React.Component{
   }
 
   render(){
-    const myPlayers = this.state.myTeam.map(player => <div ><Player playerData={player} /></div>)
-    const theirPlayers = this.state.theirTeam.map(player => <div ><Player playerData={player} /></div>)
+    const myPlayers = this.state.myTeam.map(player => <div key={player.ign}><Player playerData={player.attributes} /></div>)
+    const theirPlayers = this.state.theirTeam.map(player => <div key={player.ign}><Player playerData={player.attributes} /></div>)
     return(
       <div>
         <h1>My Team</h1>
