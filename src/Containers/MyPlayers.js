@@ -1,5 +1,5 @@
 import React from 'react'
-import PlayerCard from './PlayerCard'
+import PlayerCard from '../Components/PlayerCard'
 
 class MyPlayers extends React.Component{
   render(){

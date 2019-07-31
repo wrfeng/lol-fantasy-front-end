@@ -102,7 +102,7 @@ class Draft extends React.Component{
             body: JSON.stringify({ drafted: true })
           })
           // console.log(this.props)
-          this.props.history.push(`/leagues/${this.props.leagueId}`, {myTeam: this.state.myTeam, theirTeam: this.state.theirTeam, myDraftedId: this.state.myDraftedId, theirDraftedId: this.state.theirDraftedId})
+          this.props.history.push(`/leagues/${this.props.leagueId}`, {waivers: this.state.players, myTeam: this.state.myTeam, theirTeam: this.state.theirTeam, myDraftedId: this.state.myDraftedId, theirDraftedId: this.state.theirDraftedId})
         }
       })
   }

@@ -1,13 +1,14 @@
 import React from 'react'
 import Matchup from './Matchup'
-import MyPlayers from './MyPlayers'
-import FreeWaiver from './FreeWaiver'
+import MyPlayers from '../Containers/MyPlayers'
+import FreeWaiver from '../Containers/FreeWaiver'
 import Standings from './Standings'
 
 class LeagueShow extends React.Component{  
   state = {
     myTeam: [],
     theirTeam: [],
+    waivers: [],
     matchup: true,
     myPlayers: false,
     freeWaiver: false,
@@ -15,27 +16,30 @@ class LeagueShow extends React.Component{
   }
 
   componentDidMount(){
-
     let draftedId = this.props.location.state.myDraftedId || this.props.history.state.myDraftedId
     let theirDraftedId = this.props.location.state.theirDraftedId || this.props.history.state.theirDraftedId
     if (this.props.location.state.myTeam) {
+      let combinedTeams = this.props.location.state.myTeam.concat(this.props.location.state.theirTeam)
+      let allNames = combinedTeams.map(player => player.attributes.ign)
+      let waivers = this.props.players.filter(player => !allNames.includes(player.attributes.ign))
       this.setState({
-        myTeam: this.props.location.state.myTeam,
-        theirTeam: this.props.location.state.theirTeam
+          myTeam: this.props.location.state.myTeam,
+          theirTeam: this.props.location.state.theirTeam,
+          waivers: waivers
       })
     } else{
-
       fetch(`http://localhost:3001/drafted_teams/${draftedId}`)
         .then(resp => resp.json())
-        .then(resp => {
-          this.setState({ myTeam: resp.included, myDrafted: resp.data})
-        })
-      
-      fetch(`http://localhost:3001/drafted_teams/${theirDraftedId}`)
-        .then(resp => resp.json())
-        .then(resp => {
-          this.setState({ theirTeam: resp.included, theirDrafted: resp.data})
-          
+        .then(myDraft => {
+          this.setState({ myTeam: myDraft.included, myDrafted: myDraft.data})
+          fetch(`http://localhost:3001/drafted_teams/${theirDraftedId}`)
+            .then(resp => resp.json())
+            .then(theirDraft => {
+              let combinedTeams = myDraft.included.concat(theirDraft.included)
+              let allNames = combinedTeams.map(player => player.attributes.ign)
+              let waivers = this.props.players.filter(player => !allNames.includes(player.attributes.ign))
+              this.setState({ theirTeam: theirDraft.included, theirDrafted: theirDraft.data, waivers: waivers})
+            })
         })
     }
   }
@@ -83,9 +87,9 @@ class LeagueShow extends React.Component{
   render(){
     return(
       <div>
-        {this.state.matchup && <Matchup myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} />}
+        {this.state.matchup && <Matchup currentUser={this.props.currentUser} myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} />}
         {this.state.myPlayers && <MyPlayers myTeam={this.state.myTeam}/>}
-        {this.state.freeWaiver && <FreeWaiver />}
+        {this.state.freeWaiver && <FreeWaiver waivers={this.state.waivers}/>}
         {this.state.standings && <Standings />}
         <button onClick={() => this.showLeagues()}>My Leagues</button>
         <button onClick={() => this.showPlayers()}>My Players</button>
