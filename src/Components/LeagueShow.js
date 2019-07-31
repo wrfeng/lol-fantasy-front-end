@@ -85,12 +85,20 @@ class LeagueShow extends React.Component{
   }
 
   render(){
+    let myPoints = []
+    let theirPoints = []
+
+    for (let i = 0; i < this.state.myTeam.length; i++) {
+      myPoints[i] = this.state.myTeam.map(player => player.attributes.stats[i].total_points)
+      theirPoints[i] = this.state.theirTeam.map(player => player.attributes.stats[i].total_points)
+    }
+
     return(
       <div>
-        {this.state.matchup && <Matchup currentUser={this.props.currentUser} myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} />}
+        {this.state.matchup && <Matchup myPoints={myPoints} theirPoints={theirPoints} currentUser={this.props.currentUser} myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} />}
         {this.state.myPlayers && <MyPlayers myTeam={this.state.myTeam}/>}
         {this.state.freeWaiver && <FreeWaiver waivers={this.state.waivers}/>}
-        {this.state.standings && <Standings />}
+        {this.state.standings && <Standings myPoints={myPoints} theirPoints={theirPoints} currentUser={this.props.currentUser}/>}
         <button onClick={() => this.showLeagues()}>My Leagues</button>
         <button onClick={() => this.showPlayers()}>My Players</button>
         <button onClick={() => this.showMatchups()}>Matchups</button>

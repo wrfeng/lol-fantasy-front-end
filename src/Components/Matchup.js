@@ -39,13 +39,13 @@ class Matchup extends React.Component{
     if(this.props.myTeam[0]) {players = this.props.myTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player} /></div>)}
     if(this.props.theirTeam[0]) {players2 = this.props.theirTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player} /></div>)}
 
-    for (let i = 0; i < this.props.myTeam.length; i++) {
-      myPoints[i] = this.props.myTeam.map(player => parseFloat(player.attributes.stats[i].total_points))
-      theirPoints[i] = this.props.theirTeam.map(player => parseFloat(player.attributes.stats[i].total_points))
-    }
+    // for (let i = 0; i < this.props.myTeam.length; i++) {
+    //   myPoints[i] = this.props.myTeam.map(player => player.attributes.stats[i].total_points)
+    //   theirPoints[i] = this.props.theirTeam.map(player => player.attributes.stats[i].total_points)
+    // }
 
-    if (this.props.myTeam[0]) { myPoints = myPoints[this.state.week].reduce((acc, curr) => acc + curr)}
-    if (this.props.theirTeam[0]) { theirPoints = theirPoints[this.state.week].reduce((acc, curr) => acc + curr)}
+    if (this.props.myTeam[0]) { myPoints = this.props.myPoints[this.state.week].reduce((acc, curr) => acc + curr).toFixed(2)}
+    if (this.props.theirTeam[0]) { theirPoints = this.props.theirPoints[this.state.week].reduce((acc, curr) => acc + curr).toFixed(2)}
 
     return(
       <div>
