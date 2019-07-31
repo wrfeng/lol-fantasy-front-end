@@ -18,6 +18,7 @@ class LeagueShow extends React.Component{
   componentDidMount(){
     let draftedId = this.props.location.state.myDraftedId || this.props.history.state.myDraftedId
     let theirDraftedId = this.props.location.state.theirDraftedId || this.props.history.state.theirDraftedId
+    console.log(this.props.location.state.theirDraftedId)
     if (this.props.location.state.myTeam) {
       let combinedTeams = this.props.location.state.myTeam.concat(this.props.location.state.theirTeam)
       let allNames = combinedTeams.map(player => player.attributes.ign)
@@ -27,6 +28,7 @@ class LeagueShow extends React.Component{
           theirTeam: this.props.location.state.theirTeam,
           waivers: waivers
       })
+      
     } else{
       fetch(`http://localhost:3001/drafted_teams/${draftedId}`)
         .then(resp => resp.json())
@@ -88,7 +90,7 @@ class LeagueShow extends React.Component{
     let myPoints = []
     let theirPoints = []
 
-    for (let i = 0; i < this.state.myTeam.length; i++) {
+    for (let i = 0; i <= this.state.myTeam.length; i++) {
       myPoints[i] = this.state.myTeam.map(player => player.attributes.stats[i].total_points)
       theirPoints[i] = this.state.theirTeam.map(player => player.attributes.stats[i].total_points)
     }

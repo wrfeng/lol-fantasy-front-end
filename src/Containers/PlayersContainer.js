@@ -9,7 +9,7 @@ class PlayersContainer extends React.Component{
     const top = players.filter(player => player.attributes.position === "Top").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
     const jungle = players.filter(player => player.attributes.position === "Jungler").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
     const mid = players.filter(player => player.attributes.position === "Mid").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
-    const adc = players.filter(player => player.attributes.position === "AD Carry").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
+    const adc = players.filter(player => player.attributes.position === "ADC").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
     const support = players.filter(player => player.attributes.position === "Support").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
     return(
       <div>
@@ -19,7 +19,7 @@ class PlayersContainer extends React.Component{
         {jungle}
         <h3>Mid</h3>
         {mid}
-        <h3>ADC</h3>
+        <h3>AD Carry</h3>
         {adc}
         <h3>Support</h3>
         {support}

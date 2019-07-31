@@ -4,7 +4,8 @@ class PlayerCard extends React.Component {
   render() {
     return (
       <div>
-        <img src={this.props.playerData.attributes.img_url} height="200" width="200"></img>
+        {console.log(this.props.playerData)}
+        <img src={this.props.playerData.attributes.img_url} alt={this.props.playerData.attributes.ign}height="200" width="200"></img>
         <h4>{this.props.playerData.attributes.stats[this.props.week].ign}</h4>
         <div>Team: {this.props.playerData.attributes.stats[this.props.week].team}</div>
         <div>Position: {this.props.playerData.attributes.stats[this.props.week].position}</div>
