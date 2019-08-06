@@ -11,7 +11,7 @@ class Standings extends React.Component{
     this.props.theirPoints.forEach(week => theirPoints.push(week.reduce((accu, curr) => accu + curr).toFixed(2)))
     
     for (let i = 1; i < myPoints.length; i++) {
-      myPoints[i] > theirPoints ? wins += 1: losses += 1
+      myPoints[i] > theirPoints[i] ? wins += 1: losses += 1
     }
     return(
       <div>

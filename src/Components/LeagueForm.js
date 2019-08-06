@@ -17,7 +17,7 @@ class LeagueForm extends React.Component{
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="leaguediv">
         <input name="league_name" value={this.state.league_name} onChange={this.handleChange} placeholder="league name..." />
         <input type="submit" value="Create" />
       </form>

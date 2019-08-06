@@ -47,12 +47,18 @@ class Matchup extends React.Component{
         <button onClick={this.nextWeek}>Next</button>
         <h1>{myPoints > theirPoints && this.state.week !== 0 ? `${this.props.currentUser.username} WINS THIS WEEK` : (this.state.week !== 0 ? "CPU WINS THIS WEEK" : null)}</h1>
         <h2>{this.state.week === 0 ? "TOTALS" : `WEEK ${this.state.week}`}</h2>
-        <h2>{`${this.props.currentUser.username}'s Team`}</h2>
-        {this.props.myTeam[0] && `Total Points: ${myPoints}` }
-        {this.props.myTeam[0] && players}
-        <h3>CPU's Team</h3>
-        {this.props.theirTeam[0] && `Total Points: ${theirPoints}`}
-        {this.props.theirTeam[0] && players2 }
+
+        <div className="myMatchup">
+          <h2>{`${this.props.currentUser.username}'s Team`}</h2>
+          <h1>{this.props.myTeam[0] && `Total Points: ${myPoints}`}</h1>
+          {this.props.myTeam[0] && players}
+        </div>
+        
+        <div className="otherMatchup">
+          <h3>CPU's Team</h3>
+          <h1>{this.props.theirTeam[0] && `Total Points: ${theirPoints}`}</h1>
+          {this.props.theirTeam[0] && players2 }
+        </div>
       </div>
     )
   }

@@ -106,8 +106,9 @@ class Draft extends React.Component{
     if (this.check_eligibility(selected)) {
 
       this.setState({ myTeam: [...this.state.myTeam, selected], players: this.state.players.filter(player => player.attributes.ign !== selected.attributes.ign) })
+      this.setState({ players: this.state.players.filter(player => player.id !== selected.id) })
       let random_player = this.getRandPlayer()
-      this.setState({ players: this.state.players.filter(player => player.id !== random_player.id && player.id !== selected.id) })
+      this.setState({ players: this.state.players.filter(player => player.id !== random_player.id && player.id !== selected.id ) })
       this.computer_draft(random_player)
   
       fetch('http://localhost:3001/drafted_teams')
@@ -159,17 +160,23 @@ class Draft extends React.Component{
   
   render(){
     const myPlayers = this.state.myTeam.map(player => <div key={player.id}><Player playerData={player.attributes} /></div>)
-    const theirPlayers = this.state.theirTeam.map(player => <div key={player.id}><Player playerData={player.attributes} /></div>)
+    const theirPlayers = this.state.theirTeam.map(player => <div key={player.id} className="theirPlayers"><Player playerData={player.attributes} /></div>)
     console.log(this.state.comp)
     console.log(this.state.theirComp)
     return(
       <div>
-        <h1>My Team</h1>
+        <div className="myTeamDraft">
+          <h1>My Team</h1>
           {myPlayers}
-        <h1>Opponents Team</h1>
+        </div>
+        <div className="draftDiv">
+          <h1>Draft Your Team</h1>
+          <PlayersContainer players={this.state.players} draft={this.draft}/>
+        </div>
+        <div className="theirPlayersDraft">
+          <h1>Opponents Team</h1>
           {theirPlayers}
-        <h1>Draft Your Team</h1>
-        <PlayersContainer players={this.state.players} draft={this.draft}/>
+        </div>
       </div>
     )
   }

@@ -1,0 +1,92 @@
+.leagues {
+  text-decoration: none;
+  border: solid 1px black;
+  background-color: white;
+  padding: 25px;
+  width: 20px;
+  font-size: 12px
+}
+
+.leaguediv {
+  text-align: center;
+  padding: 25px
+}
+
+.theirPlayersDraft {
+  text-align: right;
+  float: right;
+  border: solid 1px red;
+}
+
+.myTeamDraft {
+  float:left;
+  border: solid 1px blue;
+}
+
+.draftDiv {
+  float: left;
+  text-align: center;
+  margin: 0px 175px;
+  width: 50%;
+  border: solid 1px black;
+}
+
+.topDraft {
+  float: left;
+}
+
+.jungleDraft {
+  float: left;
+  margin: 0 50px;
+}
+
+.midDraft {
+  float: left;
+  margin: 0px 50px;
+}
+
+.adcDraft {
+  float: left;
+  margin: 0px 50px;
+}
+
+.supportDraft {
+  float: left;
+}
+
+.playerCard {
+  float: left;
+  border: 1px solid black;
+  margin: 10%;
+}
+
+.myMatchup {
+  float: left;
+  margin: 0px 200px
+}
+
+.otherMatchup {
+  float: right;
+  margin: 0px 200px
+}
+
+.freeWaiver {
+  display: inline-block;
+  float: left;
+  width: 200px;
+  border: black solid 1px;
+  margin: 2px;
+  padding: 2px;
+}
+
+.buttons {
+  style: block;
+  float:right;
+}
+.button {
+ background-color: white;
+  color: black;
+  border: 2px solid gray;
+  margin: 10px;
+}
+
