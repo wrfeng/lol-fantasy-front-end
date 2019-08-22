@@ -31,7 +31,7 @@ class SignupPage extends React.Component{
     return(
       <form onSubmit={this.handleSubmit}>
         <input onChange={this.handleChange} placeholder="username..." name="username" value={this.state.username}/>
-        <input onChange={this.handleChange} placeholder="password..." name="password" value={this.state.password}/>
+        <input type="password" onChange={this.handleChange} placeholder="password..." name="password" value={this.state.password}/>
         <input type="submit" value="Signup"/>
       </form>
     )

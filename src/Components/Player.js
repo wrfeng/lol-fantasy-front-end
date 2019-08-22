@@ -5,7 +5,7 @@ class Player extends React.Component{
     return(
       <div>
         {/* {console.log(this.props)} */}
-        <img src={this.props.playerData.img_url} height="200" width="200" alt={this.props.playerData.ign}></img>
+        <img src={this.props.playerData.img_url} height="100" width="100" alt={this.props.playerData.ign}></img>
         <p>{this.props.playerData.ign}</p>
       </div>
     )

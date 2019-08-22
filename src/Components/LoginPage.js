@@ -31,11 +31,14 @@ class LoginPage extends React.Component{
   }
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleInput} placeholder="username..." name="username" value={this.state.username}/>
-        <input onChange={this.handleInput} placeholder="password..." name="password" value={this.state.password}/>
-        <input type="submit" value="Login"/>
-      </form>
+      <div className="loginPage">
+        <h2>SIGN IN</h2>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleInput} placeholder="username..." name="username" value={this.state.username}/>
+          <input type ="password" onChange={this.handleInput} placeholder="password..." name="password" value={this.state.password}/>
+          <input type="submit" value="Login"/>
+        </form>
+      </div>
     )
   }
 }

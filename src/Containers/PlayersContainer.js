@@ -13,27 +13,27 @@ class PlayersContainer extends React.Component{
     const support = players.filter(player => player.attributes.position === "Support").map(player => <div key={player.id}><DraftPlayer draft={this.props.draft} playerData={player}/></div>)
     return(
       <div>
-        <div className="topDraft">
+        <div className="draftCard">
           <h3>Top</h3>
           {top}
         </div>
 
-        <div className="jungleDraft">
+        <div className="draftCard">
           <h3>Jungle</h3>
           {jungle}
         </div>
 
-        <div className="midDraft">
+        <div className="draftCard">
           <h3>Mid</h3>
           {mid}
         </div>
 
-        <div className="adcDraft">
+        <div className="draftCard">
           <h3>AD Carry</h3>
           {adc}
         </div>
 
-        <div className="supportDraft">
+        <div className="draftCard">
           <h3>Support</h3>
           {support}
         </div>

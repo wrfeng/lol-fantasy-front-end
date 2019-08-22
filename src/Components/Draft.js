@@ -166,7 +166,7 @@ class Draft extends React.Component{
     return(
       <div>
         <div className="myTeamDraft">
-          <h1>My Team</h1>
+          <h1 className="test">My Team</h1>
           {myPlayers}
         </div>
         <div className="draftDiv">
