@@ -35,7 +35,7 @@ class Matchup extends React.Component{
     let test 
     
     if(this.props.myTeam[0]) {players = this.props.myTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player} /></div>)}
-    if(this.props.myTeam[0]) {test = this.props.myTeam.map(player => player)}
+    // if(this.props.myTeam[0]) {test = this.props.myTeam.map(player => player)}
     if(this.props.theirTeam[0]) {players2 = this.props.theirTeam.map(player => <div key={player.id}><PlayerCard week={this.state.week} playerData={player} /></div>)}
     if (this.props.myTeam[0]) { myPoints = this.props.myPoints[this.state.week].reduce((acc, curr) => acc + curr).toFixed(2)}
     if (this.props.theirTeam[0]) { theirPoints = this.props.theirPoints[this.state.week].reduce((acc, curr) => acc + curr).toFixed(2)}

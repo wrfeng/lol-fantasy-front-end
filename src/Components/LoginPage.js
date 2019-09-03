@@ -32,12 +32,20 @@ class LoginPage extends React.Component{
   render(){
     return(
       <div className="loginPage">
-        <h2>SIGN IN</h2>
+        <div className="login-form">
+        <h1 className="header-heading">SIGN IN</h1>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleInput} placeholder="username..." name="username" value={this.state.username}/>
-          <input type ="password" onChange={this.handleInput} placeholder="password..." name="password" value={this.state.password}/>
+          <div className="username-input">
+            <label>Username</label>
+            <input onChange={this.handleInput} className="form-control" name="username" value={this.state.username}/>
+          </div>
+          <div>
+            <label>Password</label>
+            <input type ="password" onChange={this.handleInput} className="form-control" name="password" value={this.state.password}/>
+          </div>
           <input type="submit" value="Login"/>
         </form>
+        </div>
       </div>
     )
   }

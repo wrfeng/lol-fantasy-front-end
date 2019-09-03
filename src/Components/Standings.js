@@ -17,9 +17,9 @@ class Standings extends React.Component{
       <div>
         <h1>Standings</h1>
         <h2>{this.props.currentUser.username}</h2>
-        {`${wins} - ${losses}`}
+        <p>{`${wins} - ${losses}`}</p>
         <h2>CPU</h2>
-        {`${losses} - ${wins}`}
+        <p>{`${losses} - ${wins}`}</p>
       </div>
     )
   }

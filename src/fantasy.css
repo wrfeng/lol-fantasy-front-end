@@ -1,7 +1,9 @@
 .leagues {
   text-decoration: none;
   border: solid 1px black;
-  background-color: white;
+  background-color: #1e2328;
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
   padding: 25px;
   width: 20px;
   font-size: 12px
@@ -15,47 +17,63 @@
 .theirPlayersDraft {
   text-align: center;
   float: right;
-  /* display: inline-block; */
-  border: solid 1px red;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  /* overflow: auto; */
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
+  width: 200px;
+  overflow: scroll;
 }
 
-.myTeamDraft {
+/* .myTeamDraft {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
   text-align: center;
   float:left; 
-  /* display: inline-block; */
   border: solid 1px blue;
-  /* max-width: 100%; */
+} */
+
+.draft {
+  overflow: scroll;
+}
+
+.draft-selection{
+  display: inline;
+}
+.myTeamDraft {
+  text-align: center;
+  display:  inline-block;
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
+  width: 200px;
+  overflow: scroll;
 }
 
 .draftDiv {
-  /* float: left; */
   display: inline-block;
   text-align: center;
-  margin: 0px 500px;
-  /* width: 60%; */
-  /* max-width: 100%; */
   border: solid 1px black;
-  /* position: absolute; */
-  /* overflow: auto; */
+  position: absolute;
+  left: 25%;
+  overflow: scroll;
 }
 
 .draftCard {
   float: left;
   /* display: inline-block; */
   overflow: auto;
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
 }
 
+.player {
+  display: inline-block;
+}
 .playerCard {
   display: inline-block;
   border: 1px solid orange;
   margin: 10%;
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
 }
 
 .myMatchup {
@@ -65,16 +83,18 @@
 
 .otherMatchup {
   float: right;
-  margin: 0px 200px
+  margin: 0px 200px;
 }
 
 .freeWaiver {
   display: inline-block;
   /* float: left; */
-  width: 200px;
-  border: black solid 1px;
+  width: 250px;
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
   margin: 2px;
   padding: 2px;
+  text-align: center;
 }
 
 .buttons {
@@ -94,22 +114,66 @@
   position: absolute; 
   top: 0; 
   left: 0; 
-  background-image: url("images/nalcs-cover.jpg");
+  background-image: url("images/draven.jpg");
 }
 
 .loginPage {
   background: #010a13;
   width: 400px;
-  height: 500px;
+  /* height: 500px; */
   position: absolute;
   top: 20%;
   left: 85%;
-  border: 3px solid rgb(120, 90, 40);
+  border: 2px solid #463714;
   margin: -70px 0 0 -170px;
+  box-shadow: 0 0 0 1px rgba(1,10,19,0.48);
 }
 
-.loginPage h2{
+h1,h2, h3, h4, h5, h6, p {
   color: #f0e6d2;
-  font-family: 'Times New Roman', Times, serif;
-  margin-left: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  color: #a09b8c;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.login-form {
+  display:inline-block;
+  width: 80%;
+  height: 80%;
+  margin: 10%;
+}
+
+.form-control {
+  display: block;
+  border: 1px solid #785a28 ;
+  background-color: #1e2328;
+  width: 100%;
+  height: 34px;
+  box-sizing: border-box;
+  margin: 5px;
+  color: #f0e6d2;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+.form-control:focus {
+  outline: none;
+  border: 1px solid #a98f5d;
+  color: #f0e6d2;
+  font-size: 14px;
+  padding: 6px 12px;
+  background: linear-gradient(to bottom, #1e2328, #292d30);
+  border-image: linear-gradient(to bottom, #785A28, #c8aa6e) 1 stretch;
+}
+
+body {
+  background: #0e1012;
 }

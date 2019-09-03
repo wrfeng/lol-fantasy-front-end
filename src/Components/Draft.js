@@ -159,22 +159,22 @@ class Draft extends React.Component{
   }
   
   render(){
-    const myPlayers = this.state.myTeam.map(player => <div key={player.id}><Player playerData={player.attributes} /></div>)
+    const myPlayers = this.state.myTeam.map(player => <li className="draft-selection" key={player.id}><Player playerData={player.attributes} /></li>)
     const theirPlayers = this.state.theirTeam.map(player => <div key={player.id} className="theirPlayers"><Player playerData={player.attributes} /></div>)
     console.log(this.state.comp)
     console.log(this.state.theirComp)
     return(
-      <div>
+      <div className="draft">
         <div className="myTeamDraft">
-          <h1 className="test">My Team</h1>
+          <h1 className="header-heading">My Team</h1>
           {myPlayers}
         </div>
         <div className="draftDiv">
-          <h1>Draft Your Team</h1>
+          <h1 className="header-heading">Draft Your Team</h1>
           <PlayersContainer players={this.state.players} draft={this.draft}/>
         </div>
         <div className="theirPlayersDraft">
-          <h1>Opponents Team</h1>
+          <h1 className="header-heading">Opponents Team</h1>
           {theirPlayers}
         </div>
       </div>
