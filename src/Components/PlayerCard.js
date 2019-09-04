@@ -3,10 +3,12 @@ import React from 'react'
 class PlayerCard extends React.Component {
   render() {
     return (
-      <div>
-        <div className="freeWaiver"> 
+      <div className="player-card">
+        <div className="player-profile">
           <img src={this.props.playerData.attributes.img_url} alt={this.props.playerData.attributes.ign}height="200" width="200"></img>
           <h4>{this.props.playerData.attributes.stats[this.props.week].ign}</h4>
+        </div>
+        <div className="freeWaiver"> 
           <div>Team: {this.props.playerData.attributes.stats[this.props.week].team}</div>
           <div>Position: {this.props.playerData.attributes.stats[this.props.week].position}</div>
           <div>Total Points: {this.props.playerData.attributes.stats[this.props.week].total_points}</div>

@@ -23,15 +23,6 @@
   overflow: scroll;
 }
 
-/* .myTeamDraft {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-  text-align: center;
-  float:left; 
-  border: solid 1px blue;
-} */
-
 .draft {
   overflow: scroll;
 }
@@ -68,13 +59,6 @@
 .player {
   display: inline-block;
 }
-.playerCard {
-  display: inline-block;
-  border: 1px solid orange;
-  margin: 10%;
-  border: 1px solid #a98f5d;
-  color: #f0e6d2;
-}
 
 .myMatchup {
   float: left;
@@ -90,7 +74,6 @@
   display: inline-block;
   /* float: left; */
   width: 250px;
-  border: 1px solid #a98f5d;
   color: #f0e6d2;
   margin: 2px;
   padding: 2px;
@@ -102,10 +85,15 @@
   float:right;
 }
 .button {
- background-color: white;
-  color: black;
-  border: 2px solid gray;
-  margin: 10px;
+  padding: 0.4em 1em;
+  border-radius: 0;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to top, #0d404c 0%, #0596aa 44%, #0596aa 93%, #0ac8b9 100%);
+  border-image-slice: 1;
+  color: #cdfafa;
+  box-shadow: 0 0 1px 1px #010a13, inset 0 0 1px 1px #010a13;
+  background: #1e2328;
+  text-transform: uppercase
 }
 
 .homepage {
@@ -176,4 +164,24 @@ label {
 
 body {
   background: #0e1012;
+}
+
+.player-profile{
+  display: inline-block;
+}
+
+.player-card{
+  border: 1px solid #a98f5d;
+  display: inline-block;
+}
+
+.league-input{
+    display: inline-block;
+  border: 1px solid #785a28 ;
+  background-color: #1e2328;
+  height: 34px;
+  box-sizing: border-box;
+  color: #f0e6d2;
+  font-size: 14px;
+  padding: 6px 12px;
 }

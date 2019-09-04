@@ -43,7 +43,7 @@ class LoginPage extends React.Component{
             <label>Password</label>
             <input type ="password" onChange={this.handleInput} className="form-control" name="password" value={this.state.password}/>
           </div>
-          <input type="submit" value="Login"/>
+          <input className="button" type="submit" value="Login"/>
         </form>
         </div>
       </div>
