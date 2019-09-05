@@ -29,11 +29,15 @@ class LoginPage extends React.Component{
         resp.token && this.props.routerProps.history.push('/leagues')
       })
   }
+
+
   render(){
     return(
       <div className="loginPage">
+        <img className="fantasy-logo" src={require("../images/fantasy-logo.png")}/>
         <div className="login-form">
         <h1 className="header-heading">SIGN IN</h1>
+        
         <form onSubmit={this.handleSubmit}>
           <div className="username-input">
             <label>Username</label>
@@ -43,8 +47,12 @@ class LoginPage extends React.Component{
             <label>Password</label>
             <input type ="password" onChange={this.handleInput} className="form-control" name="password" value={this.state.password}/>
           </div>
-          <input className="button" type="submit" value="Login"/>
+          <input className="button login" type="submit" value="Sign In"/>
         </form>
+
+          <span>
+            <p onClick={this.props.handleClick} className="sign-in">Create an account?</p>
+          </span>
         </div>
       </div>
     )
