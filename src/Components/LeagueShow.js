@@ -104,7 +104,10 @@ class LeagueShow extends React.Component{
           <button className="button" onClick={() => this.showFreeWaiver()}>Free Waiver</button>
           <button className="button" onClick={() => this.showStandings()}>Standings</button>
         </div>
-        {this.state.matchup && <Matchup myPoints={myPoints} theirPoints={theirPoints} currentUser={this.props.currentUser} myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} />}
+        {
+          this.state.matchup && <Matchup myPoints={myPoints} theirPoints={theirPoints} 
+          currentUser={this.props.currentUser} myTeam={this.state.myTeam} theirTeam={this.state.theirTeam} />
+        }
         {this.state.myPlayers && <MyPlayers myTeam={this.state.myTeam}/>}
         {this.state.freeWaiver && <FreeWaiver waivers={this.state.waivers}/>}
         {this.state.standings && <Standings myPoints={myPoints} theirPoints={theirPoints} currentUser={this.props.currentUser}/>}

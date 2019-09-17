@@ -17,8 +17,16 @@ class Draft extends React.Component{
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
-        let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
-        let otherTarget = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+        let target = resp.data.find(drafted_team => {
+          return drafted_team.attributes.user_id === this.props.currentUser.id && 
+          drafted_team.attributes.league_id === parseInt(this.props.leagueId);
+        })
+
+        let otherTarget = resp.data.find(drafted_team => {
+          return drafted_team.attributes.user_id === 2 && 
+          drafted_team.attributes.league_id === parseInt(this.props.leagueId)
+        })
+
         let names = target.attributes.players.map(player => player.ign)
         let otherNames = otherTarget.attributes.players.map(player => player.ign)
         let test = resp.included.filter(player => names.includes(player.attributes.ign))
@@ -48,7 +56,9 @@ class Draft extends React.Component{
           .then(resp => resp.json())
           .then(players => {
             this.setState({
-              players: players.data.filter(player => !myTeamNames.includes(player.attributes.ign) && !theirTeamNames.includes(player.attributes.ign))
+              players: players.data.filter(player => {
+                return !myTeamNames.includes(player.attributes.ign) && !theirTeamNames.includes(player.attributes.ign)
+              })
             })
           })
       })
@@ -56,8 +66,15 @@ class Draft extends React.Component{
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
-        let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
-        let otherTarget = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+        let target = resp.data.find(drafted_team => {
+          return drafted_team.attributes.user_id === this.props.currentUser.id && 
+          drafted_team.attributes.league_id === parseInt(this.props.leagueId)
+        })
+
+        let otherTarget = resp.data.find(drafted_team => {
+          return drafted_team.attributes.user_id === 2 && 
+          drafted_team.attributes.league_id === parseInt(this.props.leagueId)
+        })
         this.setState({ myDraftedId: target.id })
         this.setState({ theirDraftedId: otherTarget.id })
       })
@@ -105,7 +122,11 @@ class Draft extends React.Component{
 
     if (this.check_eligibility(selected)) {
 
-      this.setState({ myTeam: [...this.state.myTeam, selected], players: this.state.players.filter(player => player.attributes.ign !== selected.attributes.ign) })
+      this.setState({ 
+        myTeam: [...this.state.myTeam, selected], 
+        players: this.state.players.filter(player => player.attributes.ign !== selected.attributes.ign) 
+      })
+
       this.setState({ players: this.state.players.filter(player => player.id !== selected.id) })
       let random_player = this.getRandPlayer()
       this.setState({ players: this.state.players.filter(player => player.id !== random_player.id && player.id !== selected.id ) })
@@ -114,7 +135,11 @@ class Draft extends React.Component{
       fetch('http://localhost:3001/drafted_teams')
         .then(resp => resp.json())
         .then(resp => {
-          let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === this.props.currentUser.id && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+          let target = resp.data.find(drafted_team => {
+            return drafted_team.attributes.user_id === this.props.currentUser.id && 
+            drafted_team.attributes.league_id === parseInt(this.props.leagueId)
+          })
+
           fetch('http://localhost:3001/drafts',{
             method: 'POST',
             headers: {
@@ -133,7 +158,11 @@ class Draft extends React.Component{
     fetch('http://localhost:3001/drafted_teams')
     .then(resp => resp.json())
     .then(resp => {
-      let target = resp.data.find(drafted_team => drafted_team.attributes.user_id === 2 && drafted_team.attributes.league_id === parseInt(this.props.leagueId))
+      let target = resp.data.find(drafted_team => {
+        return drafted_team.attributes.user_id === 2 && 
+          drafted_team.attributes.league_id === parseInt(this.props.leagueId)
+      })
+
       fetch('http://localhost:3001/drafts', {
         method: 'POST',
         headers: {
@@ -153,7 +182,13 @@ class Draft extends React.Component{
           body: JSON.stringify({ drafted: true })
         })
         // console.log(this.props)
-        this.props.history.push(`/leagues/${this.props.leagueId}`, {waivers: this.state.players, myTeam: this.state.myTeam, theirTeam: this.state.theirTeam, myDraftedId: this.state.myDraftedId, theirDraftedId: this.state.theirDraftedId})
+        this.props.history.push(`/leagues/${this.props.leagueId}`, {
+          waivers: this.state.players, 
+          myTeam: this.state.myTeam, 
+          theirTeam: this.state.theirTeam, 
+          myDraftedId: this.state.myDraftedId, 
+          theirDraftedId: this.state.theirDraftedId
+        })
       }
     })
   }

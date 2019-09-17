@@ -3,7 +3,10 @@ import PlayerCard from '../Components/PlayerCard'
 
 class FreeWaiver extends React.Component{
   render(){
-    let players = this.props.waivers.map(player => <div key={player.id} className="freeWaiver"><PlayerCard week={0} playerData={player} /></div>) 
+    let players = this.props.waivers.map(player => {
+      return <div key={player.id} className="freeWaiver"><PlayerCard week={0} playerData={player} /></div>
+    })
+
     return(
       <div>
         {console.log(this.props)}

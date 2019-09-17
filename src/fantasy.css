@@ -20,11 +20,9 @@
   border: 1px solid #a98f5d;
   color: #f0e6d2;
   width: 200px;
-  overflow: scroll;
 }
 
 .draft {
-  overflow: scroll;
 }
 
 .draft-selection{
@@ -36,7 +34,6 @@
   border: 1px solid #a98f5d;
   color: #f0e6d2;
   width: 200px;
-  overflow: scroll;
 }
 
 .draftDiv {
@@ -45,7 +42,6 @@
   border: solid 1px black;
   position: absolute;
   left: 25%;
-  overflow: scroll;
 }
 
 .draftCard {
@@ -115,8 +111,6 @@
 h1,h2, h3, h4, h5, h6, p {
   color: #f0e6d2;
   font-family: sans-serif;
-  font-weight: bold;
-  font-size: 24px;
 }
 
 label {
@@ -193,7 +187,6 @@ body {
 }
 
 .home-div {
-  /* overflow: scroll; */
   height: 100%;
   width: 100%
 }
@@ -212,6 +205,4 @@ body {
   color: #a09b8c;
   font-size: 12px;
   cursor:pointer;
-  /* color:blue; */
-  /* text-decoration:underline; */
 }

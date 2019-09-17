@@ -4,7 +4,7 @@ class TeamContainer extends React.Component{
 
   render(){
     return(
-      <div>hi</div>
+      <div>test</div>
     )
   }
 }
