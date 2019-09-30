@@ -14,6 +14,7 @@ class Draft extends React.Component{
   }
 
   componentDidMount(){
+
     fetch('http://localhost:3001/drafted_teams')
       .then(resp => resp.json())
       .then(resp => {
@@ -29,11 +30,11 @@ class Draft extends React.Component{
 
         let names = target.attributes.players.map(player => player.ign)
         let otherNames = otherTarget.attributes.players.map(player => player.ign)
-        let test = resp.included.filter(player => names.includes(player.attributes.ign))
-        let otherTest = resp.included.filter(player => otherNames.includes(player.attributes.ign))
+        let myTeam = resp.included.filter(player => names.includes(player.attributes.ign))
+        let otherTeam = resp.included.filter(player => otherNames.includes(player.attributes.ign))
         this.setState({
-          myTeam: test,
-          theirTeam: otherTest
+          myTeam: myTeam,
+          theirTeam: otherTeam
         })
         this.state.myTeam.forEach(player => this.setState({
           comp: {
@@ -117,6 +118,7 @@ class Draft extends React.Component{
     }
     return rando
   }
+
   draft = (selected) => {
     if (this.state.myTeam.length >= 9) return
 

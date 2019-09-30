@@ -19,6 +19,7 @@ class LeaguesPage extends React.Component{
           })
         })
     }
+
   createLeague = (league) => {
     fetch('http://localhost:3001/leagues', {
       method: 'POST',
