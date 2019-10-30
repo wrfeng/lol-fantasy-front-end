@@ -42,8 +42,22 @@ class App extends React.Component {
     this.setState({leagueId: leagueId})
   }
 
+
+  logout = () => {
+    localStorage.clear()
+    this.setState({
+      players: [],
+      drafted_teams: [],
+      currentUser: null,
+      leagueId: '',
+      leagues: []
+    })
+
+  }
+
   render(){
     return(
+      <div>
         <Router>
           {
             this.state.currentUser && this.state.leagueId ? 
@@ -55,8 +69,11 @@ class App extends React.Component {
             <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} players={this.state.players} currentUser={this.state.currentUser} {...routerProps} />}/>
           }
           {this.state.currentUser && <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} currentUser={this.state.currentUser} selectLeague={this.selectLeague}/>}/>}
-          <Route exact path='/' render={routerProps => <HomePage setUser={this.setUser} {...routerProps} />}/>
+          {!this.state.currentUser && <Route path='/' render={routerProps => <HomePage setUser={this.setUser} {...routerProps} />}/>}
         </Router>
+        
+        {this.state.currentUser && <button class="button" onClick={this.logout}>Logout</button>}
+      </div>
     )}
 }
 
