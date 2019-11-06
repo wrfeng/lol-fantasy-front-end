@@ -4,6 +4,7 @@ import LeaguesPage from './Components/LeaguesPage'
 import { BrowserRouter as Router , Route } from 'react-router-dom'
 import LeagueShow from './Components/LeagueShow'
 import Draft from './Components/Draft'
+
 class App extends React.Component {
   state = {
     players: [],
@@ -61,15 +62,48 @@ class App extends React.Component {
         <Router>
           {
             this.state.currentUser && this.state.leagueId ? 
-              <Route path={`/draft`} render={routerProps => <Draft {...routerProps} players={this.state.players} currentUser={this.state.currentUser} leagueId={this.state.leagueId} />} /> : 
-              <Route exact path='/draft' render={routerProps => <LeaguesPage {...routerProps} currentUser={this.state.currentUser} selectLeague={this.selectLeague} />} />
-            }
-          {
-            this.state.currentUser && this.state.leagues.length > 0 && 
-            <Route path={`/leagues/:leagueId`} render={routerProps => <LeagueShow leagues={this.state.leagues} players={this.state.players} currentUser={this.state.currentUser} {...routerProps} />}/>
+              <Route path={`/draft`} render={routerProps => 
+                <Draft 
+                  {...routerProps} 
+                  players={this.state.players} 
+                  currentUser={this.state.currentUser} 
+                  leagueId={this.state.leagueId
+              } />} /> : 
+              <Route exact path='/draft' render={routerProps => 
+                <LeaguesPage 
+                  {...routerProps} 
+                  currentUser={this.state.currentUser} 
+                  selectLeague={this.selectLeague} />
+              } />
           }
-          {this.state.currentUser && <Route exact path='/leagues' render={routerProps => <LeaguesPage {...routerProps} currentUser={this.state.currentUser} selectLeague={this.selectLeague}/>}/>}
-          {!this.state.currentUser && <Route path='/' render={routerProps => <HomePage setUser={this.setUser} {...routerProps} />}/>}
+
+          {
+            this.state.currentUser && 
+            this.state.leagues.length > 0 && 
+            <Route path={`/leagues/:leagueId`} render={routerProps => 
+              <LeagueShow leagues={this.state.leagues} 
+                players={this.state.players} 
+                currentUser={this.state.currentUser} 
+                {...routerProps} />
+            }/>
+          }
+
+          {
+            this.state.currentUser && <Route exact path='/leagues' render={routerProps => 
+              <LeaguesPage 
+                {...routerProps} 
+                currentUser={this.state.currentUser} 
+                selectLeague={this.selectLeague}/>
+            }/>
+          }
+          {
+            !this.state.currentUser && 
+            <Route path='/' render={routerProps => 
+              <HomePage 
+                setUser={this.setUser} 
+                {...routerProps} />
+            }/>
+          }
         </Router>
         
         {this.state.currentUser && <button class="button" onClick={this.logout}>Logout</button>}

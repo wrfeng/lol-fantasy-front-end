@@ -28,7 +28,6 @@ class LeagueShow extends React.Component{
           theirTeam: this.props.location.state.theirTeam,
           waivers: waivers
       })
-      
     } else{
       fetch(`http://localhost:3001/drafted_teams/${draftedId}`)
         .then(resp => resp.json())
