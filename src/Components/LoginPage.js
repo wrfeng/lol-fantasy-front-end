@@ -24,10 +24,15 @@ class LoginPage extends React.Component{
     })
       .then(resp => resp.json())
       .then(resp => {
-        localStorage.setItem('token', resp.token)
-        this.props.setUser(resp.user)
-        resp.token && this.props.routerProps.history.push('/leagues')
+        if (resp.token){
+          localStorage.setItem('token', resp.token)
+          this.props.setUser(resp.user)
+          resp.token && this.props.routerProps.history.push('/leagues')
+        } else if (resp.error) {
+          alert(resp.error)
+        }
       })
+        
   }
 
   render(){
